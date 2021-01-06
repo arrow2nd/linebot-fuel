@@ -166,7 +166,7 @@ function Calc(text) {
 function HelpMsg() {
     const msg = {
         'type': 'flex',
-        'altText': '使い方',
+        'altText': 'ヘルプメッセージ',
         'contents':{
             'type': 'bubble',
             'body': {
