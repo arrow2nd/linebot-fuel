@@ -11,15 +11,18 @@ function Calc(text) {
     const date = moment().tz('Asia/Tokyo').format('YYYY/MM/DD HH:mm');
     const lines = text.split('\n');
 
-    // 行数が多い・数値以外が含まれる
-    if (lines.length >= 3) return HelpMsg();
+    // 行数が少ない
+    if (lines.length <= 1) return HelpMsg();
 
     // 走行距離・給油量
-    const mileage = lines[0];
-    const refillQuantity = lines[1];
+    const mileage = parseFloat(lines[0]);
+    const refillQuantity = parseFloat(lines[1]);
 
     // 数値かチェック
-    if (isNaN(mileage) || isNaN(refillQuantity)) return HelpMsg();
+    if (isNaN(mileage) || isNaN(refillQuantity)) return errorMsg('数値エラー', '半角数字を入力してください');
+
+    // 1以上かチェック
+    if (mileage <= 0 || refillQuantity <= 0) return errorMsg('計算エラー', '1以上の数値を入力してください');
 
     // 燃費
     const fuelConsumption = Math.round(mileage / refillQuantity * 100) / 100;
@@ -128,20 +131,20 @@ function Calc(text) {
                                 'margin': 'lg'
                             },
                             {
-                                "type": "separator",
-                                "margin": "lg"
+                                'type': 'separator',
+                                'margin': 'lg'
                             },
                             {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "contents": [{
-                                    "type": "text",
-                                    "text": date,
-                                    "size": "xs",
-                                    "color": "#aaaaaa",
-                                    "align": "end"
+                                'type': 'box',
+                                'layout': 'horizontal',
+                                'contents': [{
+                                    'type': 'text',
+                                    'text': date,
+                                    'size': 'xs',
+                                    'color': '#aaaaaa',
+                                    'align': 'end'
                                 }],
-                                "margin": "md"
+                                'margin': 'md'
                             }
                         ]
                     }
@@ -166,7 +169,7 @@ function Calc(text) {
 function HelpMsg() {
     const msg = {
         'type': 'flex',
-        'altText': 'ヘルプメッセージ',
+        'altText': 'ヘルプ',
         'contents':{
             'type': 'bubble',
             'body': {
@@ -226,12 +229,78 @@ function HelpMsg() {
             },
             'styles': {
                 'footer': {
-                'separator': true
+                    'separator': true
                 }
             }
         }
     }
     return msg;
+}
+
+/**
+ * エラーメッセージ
+ * 
+ * @param  {String} sub  サブタイトル
+ * @param  {String} text エラーメッセージ
+ * @return {Object}      flexMessage
+ */
+function errorMsg(sub, text) {
+    return {
+        'type': 'flex',
+        'altText': 'エラー',
+        'contents':{
+            'type': 'bubble',
+            'body': {
+                'type': 'box',
+                'layout': 'vertical',
+                'contents': [
+                {
+                    'type': 'text',
+                    'weight': 'bold',
+                    'size': 'sm',
+                    'text': '燃費計算',
+                    'color': '#878787'
+                },
+                {
+                    'type': 'text',
+                    'text': 'Error',
+                    'weight': 'bold',
+                    'size': 'xxl',
+                    'margin': 'md'
+                },
+                {
+                    'type': 'text',
+                    'text': sub,
+                    'size': 'xs',
+                    'color': '#aaaaaa',
+                    'wrap': true
+                },
+                {
+                    'type': 'separator',
+                    'margin': 'lg'
+                },
+                {
+                    'type': 'box',
+                    'layout': 'vertical',
+                    'margin': 'lg',
+                    'spacing': 'xs',
+                    'contents': [
+                    {
+                        'type': 'text',
+                        'wrap': true,
+                        'text': text
+                    }
+                    ]
+                }
+                ]
+            },
+            'styles': {
+                'footer': {
+                'separator': true
+                }
+            }
+        }
+    }
 }
 
 module.exports = {
