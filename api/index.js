@@ -25,17 +25,6 @@ app.post('/hook/', line.middleware(config), async (req, res) => {
  * @param {Object} ev イベント
  */
 async function bot(ev) {
-    const tokenForVerification = [
-        '00000000000000000000000000000000',
-        'ffffffffffffffffffffffffffffffff'
-    ]
-
-    // 検証なら処理しない
-    if (tokenForVerification.includes(ev.replyToken)) {
-        console.log('success!');
-        return;
-    }
-
     // テキスト以外
     if (ev.message.type !== 'text') {
         await client.replyMessage(ev.replyToken, fuel.HelpMsg());
@@ -48,6 +37,4 @@ async function bot(ev) {
 }
 
 // vercel
-(process.env.NOW_REGION) ? module.exports = app : app.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`);
-});
+(process.env.NOW_REGION) ? module.exports = app : app.listen(PORT, () => console.log(`Listening on ${PORT}`));
