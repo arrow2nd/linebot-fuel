@@ -7,28 +7,31 @@ const moment = require('moment-timezone')
  * @param  {String} text テキスト
  * @return {Object}      flexMessage
  */
-function Calc (text) {
+function Calc(text) {
   const date = moment().tz('Asia/Tokyo').format('YYYY/MM/DD HH:mm')
   const lines = text.split('\n')
 
-  // 行数が少ない
+  // 行数が足りないならエラー
   if (lines.length <= 1) return HelpMsg()
 
   // 走行距離・給油量
   const mileage = parseFloat(lines[0])
   const refillQuantity = parseFloat(lines[1])
 
-  // 数値かチェック
-  if (isNaN(mileage) || isNaN(refillQuantity)) return errorMsg('数値エラー', '半角数字を入力してください')
+  // 数値ではないならエラー
+  if (isNaN(mileage) || isNaN(refillQuantity)) {
+    return errorMsg('数値エラー', '半角数字を入力してください')
+  }
 
-  // 1以上かチェック
-  if (mileage <= 0 || refillQuantity <= 0) return errorMsg('計算エラー', '1以上の数値を入力してください')
+  // 数値が1以下ならエラー
+  if (mileage <= 0 || refillQuantity <= 0) {
+    return errorMsg('計算エラー', '1以上の数値を入力してください')
+  }
 
-  // 燃費
-  const fuelConsumption = Math.round(mileage / refillQuantity * 100) / 100
+  // 満タン法で計算した燃費
+  const fuelConsumption = Math.round((mileage / refillQuantity) * 100) / 100
 
-  // flexMessage
-  const object = {
+  const flexMessage = {
     type: 'flex',
     altText: `燃費は ${fuelConsumption}km/L です`,
     contents: {
@@ -137,13 +140,15 @@ function Calc (text) {
               {
                 type: 'box',
                 layout: 'horizontal',
-                contents: [{
-                  type: 'text',
-                  text: date,
-                  size: 'xs',
-                  color: '#aaaaaa',
-                  align: 'end'
-                }],
+                contents: [
+                  {
+                    type: 'text',
+                    text: date,
+                    size: 'xs',
+                    color: '#aaaaaa',
+                    align: 'end'
+                  }
+                ],
                 margin: 'md'
               }
             ]
@@ -158,7 +163,7 @@ function Calc (text) {
     }
   }
 
-  return object
+  return flexMessage
 }
 
 /**
@@ -166,8 +171,8 @@ function Calc (text) {
  *
  * @return {Object} flexMessage
  */
-function HelpMsg () {
-  const msg = {
+function HelpMsg() {
+  return {
     type: 'flex',
     altText: 'ヘルプ',
     contents: {
@@ -234,7 +239,6 @@ function HelpMsg () {
       }
     }
   }
-  return msg
 }
 
 /**
@@ -244,7 +248,7 @@ function HelpMsg () {
  * @param  {String} text エラーメッセージ
  * @return {Object}      flexMessage
  */
-function errorMsg (sub, text) {
+function errorMsg(sub, text) {
   return {
     type: 'flex',
     altText: 'エラー',
