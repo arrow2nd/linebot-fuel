@@ -3,7 +3,6 @@ const moment = require('moment-timezone')
 
 /**
  * 燃費計算
- *
  * @param  {String} text テキスト
  * @return {Object}      flexMessage
  */
