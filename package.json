@@ -1,19 +1,20 @@
 {
   "name": "linebot-fuel",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "start": "node ./api/index.js"
   },
   "dependencies": {
     "@line/bot-sdk": "^7.4.0",
-    "dotenv": "^13.0.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "moment-timezone": "^0.5.34"
   },
   "devDependencies": {
-    "eslint": "^8.7.0",
+    "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.5.1"
   },
