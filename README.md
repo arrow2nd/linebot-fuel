@@ -19,3 +19,7 @@
 また、なにか適当なメッセージを送ると使い方を返信します。
 
 ![1609910261801 (Small)](https://user-images.githubusercontent.com/44780846/103732271-63507d80-502a-11eb-8c70-374aa49a0d1a.png)
+
+## プライバシーポリシー
+
+[こちら](https://arrow2nd.github.io/linebot-fuel/privacypolicy) をご覧ください
