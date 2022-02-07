@@ -1,42 +1,41 @@
 'use strict'
-const express = require('express')
-const line = require('@line/bot-sdk')
-const fuel = require('../src/fuel.js')
-require('dotenv').config()
+import 'dotenv/config'
+import express from 'express'
+
+import { Client, middleware } from '@line/bot-sdk'
+import { calcFuel } from '../lib/fuel.js'
+import { helpMessage } from '../lib/message.js'
 
 const PORT = process.env.PORT
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
   channelSecret: process.env.SECRET_KEY
 }
-const client = new line.Client(config)
+
+const client = new Client(config)
+const app = express()
 
 // ルーティング
-const app = express()
-app.get('/', (_req, res) => res.send('Success! (GET)'))
-app.post('/hook/', line.middleware(config), async (req, res) => {
-  await Promise.all(req.body.events.map((e) => bot(e)))
+app.get('/', (_req, res) => res.send('ok! (GET)'))
+app.post('/hook/', middleware(config), async (req, res) => {
+  await Promise.all(req.body.events.map((e) => main(e)))
   res.status(200).end()
 })
 
 /**
  * botメイン
- *
  * @param {Object} ev イベント
  */
-async function bot(ev) {
-  // テキスト以外
-  if (ev.message.type !== 'text') {
-    await client.replyMessage(ev.replyToken, fuel.HelpMsg())
-    return
-  }
-
-  // 返信
-  const result = fuel.Calc(ev.message.text)
-  await client.replyMessage(ev.replyToken, result)
+async function main(ev) {
+  await client.replyMessage(
+    ev.replyToken,
+    ev.message.type === 'text' ? calcFuel(ev.message.text) : helpMessage()
+  )
 }
 
-// vercel
-process.env.NOW_REGION
-  ? (module.exports = app)
-  : app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+// ローカル環境
+if (!process.env.NOW_REGION) {
+  app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+}
+
+export default app
