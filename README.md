@@ -22,4 +22,4 @@
 
 ## プライバシーポリシー
 
-[こちら](https://arrow2nd.github.io/linebot-fuel/privacypolicy) をご覧ください
+[こちら](https://arrow2nd.github.io/linebot-fuel/) をご覧ください。
