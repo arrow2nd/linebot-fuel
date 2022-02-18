@@ -1,10 +1,9 @@
-'use strict'
 import 'dotenv/config'
 import express from 'express'
-
 import { Client, middleware } from '@line/bot-sdk'
-import { calcFuel } from '../lib/fuel.js'
-import { helpMessage } from '../lib/message.js'
+
+import { calcFuel } from '../libs/fuel.js'
+import { helpMessage } from '../libs/message.js'
 
 const PORT = process.env.PORT
 const config = {

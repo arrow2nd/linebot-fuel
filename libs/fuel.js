@@ -1,4 +1,3 @@
-'use strict'
 import { fuelMessage, helpMessage, errorMessage } from './message.js'
 
 /**
