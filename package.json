@@ -14,7 +14,7 @@
     "moment-timezone": "^0.5.38"
   },
   "devDependencies": {
-    "eslint": "^8.26.0",
+    "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.7.1"
   },
