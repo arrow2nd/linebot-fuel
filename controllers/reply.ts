@@ -3,8 +3,7 @@ import { Request, Response } from "express";
 import { Client, MessageEvent } from "bot-sdk";
 
 import { config } from "../libs/env.ts";
-import { calcFuel } from "../libs/fuel.ts";
-import { createHelpMessage } from "../libs/message.ts";
+import { createHelpMessage, createReplyMessage } from "../libs/message.ts";
 
 const client = new Client(config);
 
@@ -15,7 +14,7 @@ export async function reply(req: Request, res: Response): Promise<Response> {
     await client.replyMessage(
       e.replyToken,
       e.message.type === "text"
-        ? calcFuel(e.message.text)
+        ? createReplyMessage(e.message.text)
         : createHelpMessage(),
     );
   }));
