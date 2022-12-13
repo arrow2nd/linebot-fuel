@@ -2,10 +2,10 @@
   "imports": {
     "express": "npm:express@4.18.2",
     "bot-sdk": "npm:@line/bot-sdk@7.5.2",
-    "dayjs": "npm:dayjs@1.11.6",
-    "dayjs/timezone": "npm:dayjs@1.11.6/plugin/timezone.js",
-    "dayjs/utc": "npm:dayjs@1.11.6/plugin/utc.js",
-    "http": "https://deno.land/std@0.167.0/http/mod.ts",
+    "dayjs": "npm:dayjs@1.11.7",
+    "dayjs/timezone": "npm:dayjs@1.11.7/plugin/timezone.js",
+    "dayjs/utc": "npm:dayjs@1.11.7/plugin/utc.js",
+    "http": "https://deno.land/std@0.166.0/http/mod.ts",
     "dotenv": "https://deno.land/x/dotenv@v3.2.0/load.ts"
   }
 }
