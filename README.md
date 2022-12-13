@@ -37,6 +37,6 @@ SECRET_KEY=fuga
 ### 2. Dockerイメージをビルド&実行
 
 ```
-docker image build -t linebot-fuel .
-docker run -it --env-file=./.env -p 8080:8080 linebot-fuel
+deno task docker:build
+deno task docker:run
 ```

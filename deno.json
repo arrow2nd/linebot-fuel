@@ -1,6 +1,8 @@
 {
   "importMap": "import_map.json",
   "tasks": {
-    "start": "deno run --allow-env --allow-net --allow-read server.ts"
+    "run": "deno run --allow-env --allow-net --allow-read server.ts",
+    "docker:build": "docker image build -t linebot-fuel .",
+    "docker:run": "docker run -it --env-file=./.env -p 8080:8080 linebot-fuel"
   }
 }
