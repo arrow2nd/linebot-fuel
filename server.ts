@@ -1,4 +1,3 @@
-import "dotenv";
 import { PORT } from "./libs/env.ts";
 import { router } from "./libs/router.ts";
 
