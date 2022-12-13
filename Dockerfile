@@ -1,11 +1,12 @@
-FROM denoland/deno:1.10.3
+FROM denoland/deno:1.28.3
 
 ENV PORT 8080
-
-WORKDIR /app
+EXPOSE 8080
 
 USER deno
+WORKDIR /app
 
-COPY . .
+COPY --chown=deno:deno . .
+RUN deno cache server.ts
 
 CMD ["task", "start"]
