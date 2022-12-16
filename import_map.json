@@ -5,7 +5,7 @@
     "dayjs": "npm:dayjs@1.11.7",
     "dayjs/timezone": "npm:dayjs@1.11.7/plugin/timezone.js",
     "dayjs/utc": "npm:dayjs@1.11.7/plugin/utc.js",
-    "http": "https://deno.land/std@0.167.0/http/mod.ts",
+    "http": "https://deno.land/std@0.168.0/http/mod.ts",
     "dotenv": "https://deno.land/x/dotenv@v3.2.0/load.ts"
   }
 }
