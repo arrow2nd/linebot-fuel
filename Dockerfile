@@ -1,4 +1,4 @@
-FROM denoland/deno:1.28.3
+FROM denoland/deno:latest
 
 EXPOSE 8080
 
