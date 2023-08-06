@@ -34,9 +34,8 @@ ACCESS_TOKEN=hoge
 SECRET_KEY=fuga
 ```
 
-### 2. Dockerイメージをビルド&実行
+### 2. 実行
 
 ```
-deno task docker:build
-deno task docker:run
+deno task dev
 ```

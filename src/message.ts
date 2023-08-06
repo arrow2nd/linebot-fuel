@@ -1,4 +1,3 @@
-import { FlexMessage } from "bot-sdk";
 import dayjs from "dayjs";
 import timezone from "dayjs/timezone";
 import utc from "dayjs/utc";

@@ -1,8 +1,14 @@
 {
-  "importMap": "import_map.json",
   "tasks": {
-    "run": "deno run --allow-env --allow-net --allow-read server.ts",
-    "docker:build": "docker image build -t linebot-fuel .",
-    "docker:run": "docker run -it --env-file=./.env -p 8080:8080 linebot-fuel"
-  }
+    "dev": "deno run --allow-env --allow-net --allow-read --watch ./src/server.ts"
+  },
+  "imports": {
+    "dayjs": "https://esm.sh/dayjs@v1.11.9",
+    "dayjs/timezone": "https://esm.sh/dayjs@v1.11.9/plugin/timezone.js",
+    "dayjs/utc": "https://esm.sh/dayjs@v1.11.9/plugin/utc.js",
+    "dotenv": "https://deno.land/x/dotenv@v3.2.2/load.ts",
+    "hono": "https://deno.land/x/hono@v3.3.4/mod.ts",
+    "crypto": "https://deno.land/std@0.197.0/crypto/mod.ts"
+  },
+  "lock": false
 }
