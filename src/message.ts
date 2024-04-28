@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import timezone from "dayjs/timezone";
 import utc from "dayjs/utc";
+import { FlexMessage } from "./types/message.ts";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);

@@ -5,5 +5,6 @@ export type FlexMessage = {
   contents: {
     type: "bubble";
     body: any;
+    styles: Record<string, any>;
   };
 };

@@ -37,7 +37,7 @@ const app = new Hono();
 
 app.post("/hook", async (ctx: Context) => {
   // リクエストを検証する
-  const signature = ctx.req.headers.get("x-line-signature");
+  const signature = ctx.req.header("x-line-signature");
   const json = await ctx.req.text();
   const hash = await hmac(config.channelSecret, json);
 
